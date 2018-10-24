@@ -8,9 +8,9 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     Button btn1, btn2, btnAdd, btnEql, btn0, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnSub, btnDiv, btnMul, btnDot;
-    int first_operand = 0, second_operand;
-    String operator = "+" ;
-    int i_flag = 0 , opd_flag = 0, optr_flag = 0;
+    int first_operand , second_operand, first_operand1;
+    String operator = null , prev_operator = null ;
+    int opd_flag = 0;
 
     TextView txt;
     @Override
@@ -22,20 +22,39 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void onClickBtnAdd(View v) {
+        if( opd_flag == 1) {
+            if(operator == null ) {
+                first_operand = Integer.parseInt(txt.getText().toString());
+                opd_flag = 2;
+                operator = "+";
+                return;
+            }
+            prev_operator = operator;
+            second_operand = Integer.parseInt(txt.getText().toString());
+            first_operand = evaluate_expression(first_operand , second_operand , prev_operator);
+            txt.setText(Integer.toString(first_operand));
+            second_operand = 0;
+            opd_flag = 2;
+            operator = "+";
+        }
 
 
 
     }
 
     public void onClickBtn1(View v) {
-        if(txt.length()>9)
-            return;
         if(opd_flag ==1) {
+            if(txt.length()>9)
+                return;
             //first_operand =  Integer.parseInt(txt.getText().toString());
             txt.append("1");
 
         }
-        else {
+        if(opd_flag == 2) {
+            opd_flag = 1;
+            txt.setText("1");
+        }
+        if(opd_flag == 0) {
             opd_flag = 1;
             txt.setText("1");
         }
@@ -47,23 +66,74 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickBtnSub(View v) {
+        if( opd_flag == 1) {
+            if(operator == null ) {
+                first_operand = Integer.parseInt(txt.getText().toString());
+                opd_flag = 2;
+                operator = "-";
+                return;
+            }
+            prev_operator = operator;
+            second_operand = Integer.parseInt(txt.getText().toString());
+            first_operand = evaluate_expression(first_operand , second_operand , prev_operator);
+            txt.setText(Integer.toString(first_operand));
+            second_operand = 0;
+            opd_flag = 2;
+            operator = "-";
+        }
+
 
     }
 
     public void onClickBtnMul(View v) {
+        if( opd_flag == 1) {
+            if(operator == null ) {
+                first_operand = Integer.parseInt(txt.getText().toString());
+                opd_flag = 2;
+                operator = "*";
+                return;
+            }
+            prev_operator = operator;
+            second_operand = Integer.parseInt(txt.getText().toString());
+            first_operand = evaluate_expression(first_operand , second_operand , prev_operator);
+            txt.setText(Integer.toString(first_operand));
+            second_operand = 0;
+            opd_flag = 2;
+            operator = "*";
+        }
+
+
 
     }
 
     public void onClickBtnDiv(View v) {
+        if( opd_flag == 1) {
+            if(operator == null ) {
+                first_operand = Integer.parseInt(txt.getText().toString());
+                opd_flag = 2;
+                operator = "/";
+                return;
+            }
+            prev_operator = operator;
+            second_operand = Integer.parseInt(txt.getText().toString());
+            first_operand = evaluate_expression(first_operand , second_operand , prev_operator);
+            txt.setText(Integer.toString(first_operand));
+            second_operand = 0;
+            opd_flag = 2;
+            operator = "/";
+        }
+
 
     }
 
 
 
     public void onClickBtn2(View v) {
-        if(txt.length()>9)
-            return;
-        if(opd_flag ==1) {
+
+        if(opd_flag == 1) {
+
+            if(txt.length()>9)
+                return;
             //first_operand =  Integer.parseInt(txt.getText().toString());
             txt.append("2");
 
@@ -91,6 +161,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickBtnMod(View v) {
+        if( opd_flag == 1) {
+            if(operator == null ) {
+                first_operand = Integer.parseInt(txt.getText().toString());
+                opd_flag = 2;
+                operator = "%";
+                return;
+            }
+            prev_operator = operator;
+            second_operand = Integer.parseInt(txt.getText().toString());
+            first_operand = evaluate_expression(first_operand , second_operand , prev_operator);
+            txt.setText(Integer.toString(first_operand));
+            second_operand = 0;
+            opd_flag = 2;
+            operator = "%";
+        }
+
 
 
     }
@@ -205,12 +291,19 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void onClickBtnEql(View v) {
-        txt.setText(Integer.toString(first_operand));
+        second_operand = Integer.parseInt(txt.getText().toString());
+        first_operand1 = evaluate_expression(first_operand , second_operand , operator);
+        txt.setText(Integer.toString(first_operand1));
+        operator = null;
 
 
     }
 
     public void onClickBtnClr(View v) {
+         operator = null ;
+         prev_operator = null ;
+         opd_flag = 0;
+         txt.setText("0");
 
     }
 
@@ -221,25 +314,31 @@ public class MainActivity extends AppCompatActivity {
         if (operator.equals("+")) {
             a = first_optr + second_optr;
             str = Integer.toString(a);
-            txt.setText(str);
-            return a;
+            //txt.setText(str);
+            //return a;
         }
 
         if (operator.equals("*")) {
             a = first_optr * second_optr;
             str = Integer.toString(a);
-            txt.setText(str);
+           // txt.setText(str);
         }
         if (operator.equals("/")) {
             a = first_optr / second_optr;
             str = Integer.toString(a);
-            txt.setText(str);
+           // txt.setText(str);
         }
         if (operator.equals("-")) {
             a = first_optr - second_optr;
             str = Integer.toString(a);
-            txt.setText(str);
-            return a;
+           // txt.setText(str);
+            //return a;
+        }
+        if (operator.equals("%")) {
+            a = first_optr % second_optr;
+            str = Integer.toString(a);
+            // txt.setText(str);
+            //return a;
         }
         return a;
     }
