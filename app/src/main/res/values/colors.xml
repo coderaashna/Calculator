@@ -3,4 +3,9 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name = "No_plate_background">#252a34</color>
+    <color name = "No_plate_text_color"> #08d9d6</color>
+    <color name = "Btn_background">#ff2e63</color>
+    <color name = "Btn_txt_color"> #eaeaea</color>
+
 </resources>

@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
-    Button btn1, btn2, btnAdd, btnEql, btn0, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnSub, btnDiv, btnMul, btnDot;
+    Button btn1, btn2, btnAdd, btnEql, btn0, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btnSub, btnDiv, btnMul;
     int first_operand , second_operand, first_operand1;
     String operator = null , prev_operator = null ;
     int opd_flag = 0;
@@ -19,11 +19,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         txt = (TextView)findViewById(R.id.txt);
         txt.setText(null);
-
     }
     public void onClickBtnAdd(View v) {
-        if( opd_flag == 1) {
-            if(operator == null ) {
+        if (opd_flag == 1) {
+            if (operator == null) {
                 first_operand = Integer.parseInt(txt.getText().toString());
                 opd_flag = 2;
                 operator = "+";
@@ -31,15 +30,12 @@ public class MainActivity extends AppCompatActivity {
             }
             prev_operator = operator;
             second_operand = Integer.parseInt(txt.getText().toString());
-            first_operand = evaluate_expression(first_operand , second_operand , prev_operator);
+            first_operand = evaluate_expression(first_operand, second_operand, prev_operator);
             txt.setText(Integer.toString(first_operand));
             second_operand = 0;
             opd_flag = 2;
             operator = "+";
         }
-
-
-
     }
 
     public void onClickBtn1(View v) {
@@ -58,9 +54,6 @@ public class MainActivity extends AppCompatActivity {
             opd_flag = 1;
             txt.setText("1");
         }
-
-
-
     }
 
 
